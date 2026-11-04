@@ -1,0 +1,320 @@
+/* =========================
+   GLOBAL STYLES
+========================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'DM Sans', sans-serif;
+    color: #111;
+    overflow-x: hidden;
+}
+
+
+/* =========================
+   HERO SECTION
+========================= */
+
+.hero {
+    position: relative;
+    padding-top: 80px;
+    box-sizing: border-box;
+    width: 100%;
+    min-height: 100vh;
+    min-height: 100svh;
+    overflow: hidden;
+
+    background-image: url("../images/portfolio_bg.jpg");
+    background-size: 100% auto;
+    background-position: center top;
+    background-repeat: no-repeat;
+    background-color: #8eb9c4;
+}
+
+
+
+.intro {
+    position: absolute;
+    top: 27%;
+    left: 31%;
+
+    z-index: 3;
+}
+
+.intro p {
+    font-size: clamp(13px, 1.1vw, 17px);
+    font-weight: 400;
+    letter-spacing: -0.3px;
+}
+
+
+
+.headline {
+    position: absolute;
+    top: 40%;
+    left: 30.5%;
+
+    width: 66%;
+    height: 300px;
+    z-index: 3;
+}
+
+.portfolio-title {
+    position: absolute;
+    width: min(75%, 1000px);
+    height: auto;
+    top: 29%;
+    left:37%;
+    transform: translate(-50%, -50%);
+    z-index: 4;
+}
+
+/* =========================
+   NAVIGATION
+========================= */
+
+.hero-nav {
+    position: absolute;
+
+    right: 6%;
+    bottom: 13%;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 2px;
+
+    z-index: 5;
+}
+
+.hero-nav a {
+    font-size: 16px;
+    font-weight: 400;
+
+    color: #171717;
+
+    text-decoration: none;
+
+    transition: color 0.3s ease;
+}
+
+.hero-nav a span {
+    display: inline-block;
+
+    transition: transform 0.3s ease;
+}
+
+.hero-nav a:hover {
+    color: #ec4b9c;
+}
+
+.hero-nav a:hover span {
+    transform: translateX(5px);
+}
+
+
+/* =========================
+   BOTTOM TICKER
+========================= */
+
+.ticker {
+    position: absolute;
+
+    bottom: 0;
+    left: 0;
+
+    width: 100%;
+    height: 38px;
+
+    background-color: #F4F0E8;
+
+    overflow: hidden;
+
+    display: flex;
+    align-items: center;
+
+    z-index: 6;
+}
+
+.ticker-track {
+    display: flex;
+    width: max-content;
+
+    animation: ticker-scroll 25s linear infinite;
+}
+
+.ticker-group {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.ticker-group span {
+    font-size: 12px;
+    font-weight: 700;
+
+    white-space: nowrap;
+}
+
+.ticker-dot {
+    margin: 0 25px;
+}
+
+@keyframes ticker-scroll {
+
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(-50%);
+    }
+
+}
+
+
+/* Pause ticker when hovered */
+
+.ticker:hover .ticker-track {
+    animation-play-state: paused;
+}
+
+
+/* =========================
+   TABLET RESPONSIVENESS
+========================= */
+
+@media (max-width: 1024px) {
+
+    .intro {
+        left: 32%;
+        top: 30%;
+    }
+
+    .headline {
+        left: 32%;
+        top: 40%;
+        width: 65%;
+    }
+
+    .portfolio-title {
+        font-size: clamp(75px, 10vw, 110px);
+        letter-spacing: -6px;
+    }
+
+    .folio {
+        top: 75px;
+        right: 5%;
+    }
+
+    .flourish {
+        width: 55%;
+        left: 18%;
+    }
+
+    .hero-nav {
+        right: 7%;
+        bottom: 12%;
+    }
+
+}
+
+
+/* =========================
+   MOBILE RESPONSIVENESS
+========================= */
+
+@media (max-width: 600px) {
+
+    .hero {
+        min-height: 100svh;
+
+        background-size: cover;
+        background-position: 35% center;
+    }
+
+    .intro {
+        top: 12%;
+        left: 8%;
+    }
+
+    .intro p {
+        font-size: 14px;
+    }
+
+    .headline {
+        top: 28%;
+        left: 7%;
+
+        width: 90%;
+        height: 200px;
+    }
+
+    .portfolio-title {
+        font-size: clamp(65px, 15vw, 95px);
+        letter-spacing: -5px;
+    }
+
+    .folio {
+        top: 65px;
+        right: 2%;
+    }
+
+    .flourish {
+        width: 58%;
+        top: -30px;
+        left: 20%;
+    }
+
+    .hero-nav {
+        right: 7%;
+        bottom: 12%;
+    }
+
+    .hero-nav a {
+        font-size: 14px;
+    }
+
+    .ticker {
+        height: 34px;
+    }
+
+    .ticker-group span {
+        font-size: 10px;
+    }
+
+    .ticker-dot {
+        margin: 0 16px;
+    }
+
+}
+
+
+/* =========================
+   REDUCED MOTION ACCESSIBILITY
+========================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    html {
+        scroll-behavior: auto;
+    }
+
+    .ticker-track {
+        animation: none;
+    }
+
+    .hero-nav a,
+    .hero-nav a span {
+        transition: none;
+    }
+
+}
