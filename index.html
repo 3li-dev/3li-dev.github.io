@@ -9,13 +9,10 @@
 
     <meta name="description" content="The creative portfolio of Ali, showcasing photography, graphic design and creative projects.">
 
-    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,700;1,800&display=swap" rel="stylesheet">
-
-    <!-- CSS -->
     <link rel="stylesheet" href="css/style.css">
 </head>
 
@@ -23,15 +20,12 @@
 
     <main>
 
-        <!-- HERO SECTION -->
         <section class="hero">
 
-            <!-- Introduction -->
             <div class="intro">
                 <p>Hi! I'm Ali and this is my</p>
             </div>
 
-            <!-- Main Portfolio Heading -->
             <div class="headline">
 
                     <!---
@@ -48,33 +42,40 @@
                 >
 
             -->
+                <!--
                 
-            <img src="images/SVG/title.svg" alt="Portfolio" class="portfolio-title" draggable="false">                
+            <img src="images/SVG/title.svg" alt="Portfolio" class="portfolio-title" draggable="false">      
 
+-->
+            <picture>
+    <source media="(max-width: 600px)" srcset="images/SVG/title_yt.svg">
+    <img src="images/SVG/title.svg" alt="Portfolio" class="portfolio-title" draggable="false">
+</picture>
             </div>
 
             <!-- Navigation -->
             <nav class="hero-nav" aria-label="Main navigation">
 
-                <a href="about.html">
+                <h5>[Coming Soon]</h5>
+
+                <a href="#">
                     About me <span>→</span>
                 </a>
 
-                <a href="photography.html">
+                <a href="#">
                     Photography <span>→</span>
                 </a>
 
-                <a href="graphic-design.html">
+                <a href="#">
                     Graphic Design <span>→</span>
                 </a>
 
-                <a href="entrepreneurship.html">
+                <a href="#">
                     Entrepreneurship <span>→</span>
                 </a>
 
             </nav>
 
-            <!-- Scrolling Bottom Text -->
             <div class="ticker" aria-label="Professional side-quest">
 
                 <div class="ticker-track">
@@ -120,11 +121,81 @@
             </div>
 
         </section>
+<section class="about-me">
+    <div class="about-me-content">
+
+        <img src="images/abtme.jpg"
+             alt="About me portrait"
+             class="abtmeimg"
+             draggable="false">
+
+        <div class="about-overlay about-left">
+            <p class="about-small">A LITTLE INTRODUCTION</p>
+            <h1>WHO IS ALIIII</h1>
+            <p class="about-description">
+          A Web Media student at Bahrain Polytechnic
+          My interests sit somewhere between photography,
+         design, digital media and entrepreneurship. 
+         <i>And building experiences.</i>
+        
+
+            </p>
+        </div>
+
+        <div class="about-overlay about-right">
+            <p class="about-small">Long story short,</p>
+            <h2>I make things happen</h2>
+            <p class="about-description">
+                Didn’t find analog film in bahrain? Started my own business. <br>   
+                Didn’t find cool events? Starting making them.   
+            </p>
+        </div>
+
+    </div>
+</section>
+
+
 
     </main>
 
-    <!-- JavaScript -->
-    <script src="js/script.js"></script>
+
+    
+    <footer class="site-footer">
+
+    <div class="footer-top">
+        <div class="footer-message">
+            <p>Have something in mind?</p>
+            <h2>Let's make<br>something cooool.</h2>
+            <a href="https://wa.me/39561313" class="footer-cta">
+                Get in touch
+            </a>
+        </div>
+
+        <div class="footer-details">
+            <div>
+                <h3>Explore</h3>
+                <a href="#">Home</a>
+                <a href="#">About me</a>
+                <a href="#">Photography</a>
+                <a href="#">Graphic Design</a>
+            </div>
+
+            <div>
+                <h3>Find me</h3>
+                <a href="https://www.instagram.com/3li.visuals">Instagram</a>
+                <a href="mailto:ali7meerali@gmail.com">Email</a>
+                <a href="https://wa.me/39561313">WhatsApp</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer-bottom">
+        <p>Designed & built by Ali Saleh</p>
+        <p>© 2026 All rights reserved.</p>
+        <a href="#top">Back to top ↑</a>
+    </div>
+
+</footer>
 
 </body>
 </html>

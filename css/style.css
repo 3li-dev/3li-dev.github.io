@@ -1,6 +1,4 @@
-/* =========================
-   GLOBAL STYLES
-========================= */
+
 
 * {
     margin: 0;
@@ -9,19 +7,30 @@
 }
 
 html {
+    scroll-snap-type: y proximity;
     scroll-behavior: smooth;
 }
+
 
 body {
     font-family: 'DM Sans', sans-serif;
     color: #111;
     overflow-x: hidden;
+    margin: 0;
 }
 
 
-/* =========================
-   HERO SECTION
-========================= */
+
+
+
+section {
+    min-height: 100vh;
+    min-height: 100svh;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+}
+
+/*
 
 .hero {
     position: relative;
@@ -39,8 +48,20 @@ body {
     background-color: #8eb9c4;
 }
 
+*/
 
+.hero {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    height: 100svh;
+    overflow: hidden;
 
+    background-image: url("../images/portfolio_bg.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
 .intro {
     position: absolute;
     top: 27%;
@@ -77,9 +98,6 @@ body {
     z-index: 4;
 }
 
-/* =========================
-   NAVIGATION
-========================= */
 
 .hero-nav {
     position: absolute;
@@ -119,15 +137,76 @@ body {
 .hero-nav a:hover span {
     transform: translateX(5px);
 }
+/*abtme*/
 
+.about-me {
+    width: 100%;
+    height: 100vh;
+    height: 100svh;
+    overflow: hidden;
+}
 
-/* =========================
-   BOTTOM TICKER
-========================= */
+.footer-details h4 {
+    font-size: 14px;
+    color: #767676;
+    
+}
 
+.about-me-content {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.abtmeimg {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+.about-overlay {
+    position: absolute;
+    z-index: 2;
+    width: 30%;
+    color: #F5F1EA;
+}
+
+.about-left {
+    top: 15%;
+    left: 8%;
+}
+
+.about-right {
+    top: 45%;
+    right: 8%;
+}
+
+.about-small {
+    font-size: 13px;
+    letter-spacing: 3px;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.about-overlay h1,
+.about-overlay h2 {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: clamp(35px, 5vw, 70px);
+    font-weight: 700;
+    font-style: italic;
+    letter-spacing: -3px;
+    margin: 0 0 20px;
+}
+
+.about-description {
+    font-size: 16px;
+    line-height: 1.7;
+}
 .ticker {
     position: absolute;
-
     bottom: 0;
     left: 0;
 
@@ -167,6 +246,122 @@ body {
 .ticker-dot {
     margin: 0 25px;
 }
+/* FOOTER */
+
+.site-footer {
+    background-color: #8eb9c4;
+    color: #111;
+    padding: 80px 6% 25px;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+    scroll-snap-align: start;
+    scroll-snap-stop: normal;
+}
+
+.footer-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding-bottom: 80px;
+    gap: 40px;
+}
+
+.footer-message p {
+    font-size: 16px;
+    margin-bottom: 15px;
+}
+
+.footer-message h2 {
+    font-size: clamp(55px, 8vw, 110px);
+    line-height: 0.85;
+    letter-spacing: -5px;
+    margin: 0 0 35px;
+    font-weight: 700;
+}
+
+.footer-cta {
+    display: inline-block;
+    background: #ed55a1;
+    color: #111;
+    text-decoration: none;
+    padding: 13px 25px;
+    border-radius: 30px;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.footer-cta:hover {
+    background: #111;
+    color: white;
+}
+
+.footer-details {
+    display: flex;
+    gap: 80px;
+    padding-bottom: 5px;
+}
+
+.footer-details div {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.footer-details h3 {
+    font-size: 15px;
+    margin-bottom: 10px;
+}
+
+.footer-details a {
+    color: #111;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.footer-details a:hover {
+    color: #ed55a1;
+}
+
+.footer-bottom {
+    border-top: 1px solid rgba(0,0,0,0.5);
+    padding-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 12px;
+}
+
+.footer-bottom p {
+    margin: 0;
+}
+
+.footer-bottom a {
+    color: #111;
+    text-decoration: none;
+}
+
+
+@media (max-width: 700px) {
+    .footer-top {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 55px;
+    }
+
+    .footer-details {
+        gap: 50px;
+    }
+
+    .footer-message h2 {
+        letter-spacing: -3px;
+    }
+
+    .footer-bottom {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+}
 
 @keyframes ticker-scroll {
 
@@ -181,16 +376,6 @@ body {
 }
 
 
-/* Pause ticker when hovered */
-
-.ticker:hover .ticker-track {
-    animation-play-state: paused;
-}
-
-
-/* =========================
-   TABLET RESPONSIVENESS
-========================= */
 
 @media (max-width: 1024px) {
 
@@ -228,55 +413,62 @@ body {
 }
 
 
-/* =========================
-   MOBILE RESPONSIVENESS
-========================= */
+
+
+/* MOBILE VERSION */
 
 @media (max-width: 600px) {
 
+    html {
+        scroll-snap-type: y mandatory;
+    }
+
+    section {
+        min-height: 100svh;
+    }
+
     .hero {
+        width: 100%;
+        height: 100svh;
         min-height: 100svh;
 
         background-size: cover;
-        background-position: 35% center;
+        background-position: 8% center;
     }
 
     .intro {
-        top: 12%;
-        left: 8%;
+        top: 25%;
+        left: 30%;
     }
 
     .intro p {
-        font-size: 14px;
+        font-size: 13px;
     }
 
     .headline {
-        top: 28%;
-        left: 7%;
-
+        position: absolute;
+        top: 30%;
+        left: 5%;
         width: 90%;
-        height: 200px;
+        height: auto;
     }
 
     .portfolio-title {
-        font-size: clamp(65px, 15vw, 95px);
-        letter-spacing: -5px;
-    }
+        position: relative;
+        display: block;
+        width: 100%;
+        max-width: 100%;
+        height: auto;
 
-    .folio {
-        top: 65px;
-        right: 2%;
-    }
-
-    .flourish {
-        width: 58%;
-        top: -30px;
-        left: 20%;
+        top: auto;
+        left: auto;
+        transform: none;
     }
 
     .hero-nav {
         right: 7%;
-        bottom: 12%;
+        bottom: 10%;
+        gap: 7px;
     }
 
     .hero-nav a {
@@ -284,7 +476,7 @@ body {
     }
 
     .ticker {
-        height: 34px;
+        height: 32px;
     }
 
     .ticker-group span {
@@ -292,15 +484,113 @@ body {
     }
 
     .ticker-dot {
-        margin: 0 16px;
+        margin: 0 12px;
     }
 
+    .about-me {
+        height: 100svh;
+        min-height: 100svh;
+        overflow: hidden;
+    }
+
+    .about-me-content {
+        width: 100%;
+        height: 100%;
+    }
+
+    .abtmeimg {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+    }
+
+    .about-overlay {
+        width: 42%;
+    }
+
+    .about-left {
+        top: 10%;
+        left: 6%;
+    }
+
+    .about-right {
+        top: 52%;
+        right: 6%;
+    }
+
+    .about-small {
+        font-size: 9px;
+        letter-spacing: 1.5px;
+        margin-bottom: 12px;
+    }
+
+    .about-overlay h1,
+    .about-overlay h2 {
+        font-size: clamp(27px, 8vw, 42px);
+        letter-spacing: -1.5px;
+        margin-bottom: 12px;
+    }
+
+    .about-description {
+        font-size: 12px;
+        line-height: 1.5;
+    }
+
+    .site-footer {
+        padding: 55px 7% 25px;
+        min-height: 100svh;
+        box-sizing: border-box;
+    }
+
+    .footer-top {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 45px;
+        padding-bottom: 50px;
+    }
+
+    .footer-message p {
+        font-size: 14px;
+    }
+
+    .footer-message h2 {
+        font-size: clamp(48px, 13vw, 70px);
+        letter-spacing: -3px;
+        line-height: 0.9;
+        margin-bottom: 25px;
+    }
+
+    .footer-details {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 35px;
+    }
+
+    .footer-details div {
+        gap: 10px;
+    }
+
+    .footer-details h3 {
+        font-size: 14px;
+    }
+
+    .footer-details a {
+        font-size: 13px;
+    }
+
+    .footer-bottom {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+        font-size: 11px;
+    }
 }
 
 
-/* =========================
-   REDUCED MOTION ACCESSIBILITY
-========================= */
+
+
+
 
 @media (prefers-reduced-motion: reduce) {
 
