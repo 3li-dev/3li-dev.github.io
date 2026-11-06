@@ -1,5 +1,3 @@
-
-
 * {
     margin: 0;
     padding: 0;
@@ -18,10 +16,6 @@ body {
     overflow-x: hidden;
     margin: 0;
 }
-
-
-
-
 
 section {
     min-height: 100vh;
@@ -57,7 +51,7 @@ section {
     height: 100svh;
     overflow: hidden;
 
-    background-image: url("../images/portfolio_bg.jpg");
+    background-image: url("../images/portfolio_bg copy.webp");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -235,7 +229,7 @@ section {
     transform: translate(-50%, -50%);
     z-index: 4;
 }
-
+/*
 
 .hero-nav {
     position: absolute;
@@ -275,7 +269,107 @@ section {
 .hero-nav a:hover span {
     transform: translateX(5px);
 }
+*/
 /*abtme*/
+/* FLOATING NAVIGATION */
+
+.hero-nav {
+    position: fixed;
+    right: 6%;
+    bottom: 13%;
+    transition: bottom 0.4s ease, opacity 0.3s ease;
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+
+    z-index: 999999;
+
+    isolation: isolate;
+    pointer-events: auto;
+}
+
+
+.hero-nav.nav-about {
+    position: fixed !important;
+    bottom: 8% !important;
+    top: auto !important;
+}
+
+.hero-nav.nav-hidden {
+    display: none !important;
+}
+.hero-nav {
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.hero-nav.nav-hidden {
+    display: none !important;
+}
+
+.hero-nav h5 {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+    color: #171717;
+}
+
+.hero-nav a {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+
+    font-size: 16px;
+    font-weight: 400;
+
+    color: #171717;
+    text-decoration: none;
+
+    transition: color 0.3s ease;
+}
+
+.hero-nav a span {
+    display: inline-block;
+    transition: transform 0.3s ease;
+}
+
+.hero-nav a:hover {
+    color: #ec4b9c;
+}
+
+.hero-nav a:hover span {
+    transform: translateX(5px);
+}
+
+
+/* MOBILE */
+
+@media (max-width: 760px) {
+
+    .hero-nav {
+        right: 15px;
+        bottom: 20px;
+
+        padding: 0;
+        background: none;
+        border: none;
+        backdrop-filter: none;
+
+        gap: 3px;
+    }
+
+    .hero-nav h5 {
+        font-size: 8px;
+        margin-bottom: 5px;
+    }
+
+    .hero-nav a {
+        font-size: 12px;
+    }
+
+}
 
 .about-me {
     width: 100%;
@@ -927,3 +1021,4 @@ section {
     }
 
 }
+
