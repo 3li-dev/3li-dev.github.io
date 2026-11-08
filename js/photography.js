@@ -1,8 +1,9 @@
-
 document.addEventListener("DOMContentLoaded", () => {
 
     const wall = document.getElementById("photoWall");
-    const photos = [...document.querySelectorAll(".photo-card")];
+    if (!wall) return;
+
+    let photos = [...wall.querySelectorAll(".photo-card")];
 
     const shuffleBtn = document.getElementById("shuffleBtn");
 
@@ -16,6 +17,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const prevBtn = document.getElementById("viewerPrev");
     const nextBtn = document.getElementById("viewerNext");
 
+    if (!viewer || !viewerImage) return;
+
     let currentIndex = 0;
     let highestZ = 20;
 
@@ -28,25 +31,25 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // INITIAL POSITIONS
 
-   const positions = [
-    { left: 3,  top: 35,  width: 19, rotation: -5 },
-    { left: 27, top: 65,  width: 18, rotation: 4 },
-    { left: 52, top: 25,  width: 19, rotation: -3 },
-    { left: 76, top: 75,  width: 18, rotation: 5 },
+    const positions = [
+        { left: 3,  top: 35,  width: 19, rotation: -5 },
+        { left: 27, top: 65,  width: 18, rotation: 4 },
+        { left: 52, top: 25,  width: 19, rotation: -3 },
+        { left: 76, top: 75,  width: 18, rotation: 5 },
 
-    { left: 8,  top: 320, width: 19, rotation: 4 },
-    { left: 32, top: 350, width: 18, rotation: -5 },
-    { left: 57, top: 315, width: 19, rotation: 5 },
-    { left: 79, top: 365, width: 17, rotation: -4 },
+        { left: 8,  top: 320, width: 19, rotation: 4 },
+        { left: 32, top: 350, width: 18, rotation: -5 },
+        { left: 57, top: 315, width: 19, rotation: 5 },
+        { left: 79, top: 365, width: 17, rotation: -4 },
 
-    { left: 3,  top: 610, width: 18, rotation: -3 },
-    { left: 26, top: 625, width: 19, rotation: 5 },
-    { left: 51, top: 600, width: 18, rotation: -4 },
-    { left: 75, top: 640, width: 19, rotation: 3 },
+        { left: 3,  top: 610, width: 18, rotation: -3 },
+        { left: 26, top: 625, width: 19, rotation: 5 },
+        { left: 51, top: 600, width: 18, rotation: -4 },
+        { left: 75, top: 640, width: 19, rotation: 3 },
 
-    { left: 20, top: 680, width: 17, rotation: -5 },
-    { left: 57, top: 710, width: 18, rotation: 4 }
-];
+        { left: 20, top: 680, width: 17, rotation: -5 },
+        { left: 57, top: 710, width: 18, rotation: 4 }
+    ];
 
 
     function applyPositions() {
@@ -56,6 +59,7 @@ document.addEventListener("DOMContentLoaded", () => {
         photos.forEach((photo, index) => {
 
             const position = positions[index];
+            if (!position) return;
 
             photo.style.setProperty("--left", `${position.left}%`);
             photo.style.setProperty("--top", `${position.top}px`);
@@ -73,45 +77,76 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // SHUFFLE
 
-    shuffleBtn.addEventListener("click", () => {
+    function shuffleArray(array) {
 
-        if (isMobile()) {
+        const shuffled = [...array];
 
-            const shuffled = [...photos].sort(() => Math.random() - 0.5);
+        for (let i = shuffled.length - 1; i > 0; i--) {
 
-            shuffled.forEach(photo => wall.appendChild(photo));
+            const j = Math.floor(Math.random() * (i + 1));
 
-            return;
+            [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+
         }
 
-        photos.forEach(photo => {
+        return shuffled;
 
-            const wallWidth = wall.clientWidth;
-            const wallHeight = wall.clientHeight;
+    }
 
-            const width = photo.offsetWidth;
-            const height = photo.offsetHeight;
 
-            const maxLeft = Math.max(0, wallWidth - width);
-            const maxTop = Math.max(0, wallHeight - height);
+    if (shuffleBtn) {
 
-            const left = Math.random() * maxLeft;
-            const top = Math.random() * maxTop;
-            const rotation = Math.random() * 12 - 6;
+        shuffleBtn.addEventListener("click", () => {
 
-            photo.style.setProperty(
-                "--left",
-                `${(left / wallWidth) * 100}%`
-            );
+            if (isMobile()) {
 
-            photo.style.setProperty("--top", `${Math.min(top, maxTop)}px`);
-            photo.style.setProperty("--rotation", `${rotation}deg`);
+                const shuffled = shuffleArray(photos);
 
-            photo.style.zIndex = ++highestZ;
+                // Keep decorative elements after the photographs.
+                const firstDecoration = wall.querySelector(
+                    ".wall-note, .wall-doodle, .wall-sticker"
+                );
+
+                shuffled.forEach(photo => {
+                    wall.insertBefore(photo, firstDecoration);
+                });
+
+                // Update the order used by next / previous.
+                photos = [...wall.querySelectorAll(".photo-card")];
+
+                return;
+            }
+
+            photos.forEach(photo => {
+
+                const wallWidth = wall.clientWidth;
+                const wallHeight = wall.clientHeight;
+
+                const width = photo.offsetWidth;
+                const height = photo.offsetHeight;
+
+                const maxLeft = Math.max(0, wallWidth - width);
+                const maxTop = Math.max(0, wallHeight - height);
+
+                const left = Math.random() * maxLeft;
+                const top = Math.random() * maxTop;
+                const rotation = Math.random() * 12 - 6;
+
+                photo.style.setProperty(
+                    "--left",
+                    `${(left / wallWidth) * 100}%`
+                );
+
+                photo.style.setProperty("--top", `${top}px`);
+                photo.style.setProperty("--rotation", `${rotation}deg`);
+
+                photo.style.zIndex = ++highestZ;
+
+            });
 
         });
 
-    });
+    }
 
 
     // DRAG PHOTOGRAPHS
@@ -160,8 +195,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
             const wallRect = wall.getBoundingClientRect();
 
-            const newLeft = event.clientX - wallRect.left - dragData.offsetX;
-            const newTop = event.clientY - wallRect.top - dragData.offsetY;
+            const newLeft =
+                event.clientX - wallRect.left - dragData.offsetX;
+
+            const newTop =
+                event.clientY - wallRect.top - dragData.offsetY;
 
             photo.style.setProperty(
                 "--left",
@@ -202,16 +240,39 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     // OPEN IMAGE VIEWER
+    // Full-resolution image is requested only when a photo is clicked.
 
     function openViewer(index) {
 
-        currentIndex = index;
+        if (!photos.length) return;
+
+        currentIndex = (index + photos.length) % photos.length;
 
         const photo = photos[currentIndex];
         const image = photo.querySelector("img");
 
-        viewerImage.src = image.src;
-        viewerImage.alt = image.alt;
+        if (!image) return;
+
+        const fullImage =
+            image.dataset.full ||
+            image.currentSrc ||
+            image.src;
+
+        viewerImage.onerror = () => {
+
+            // If the full-size image fails, use the wall version.
+            viewerImage.onerror = null;
+
+            console.error("Could not load full-size photograph:", fullImage);
+
+            viewerImage.src = image.currentSrc || image.src;
+
+        };
+
+        viewerImage.alt = image.alt || "Photography by Ali";
+        viewerImage.decoding = "async";
+        viewerImage.loading = "eager";
+        viewerImage.setAttribute("fetchpriority", "high");
 
         viewerCaption.textContent = photo.dataset.caption || "";
         viewerLocation.textContent = photo.dataset.location || "";
@@ -219,10 +280,13 @@ document.addEventListener("DOMContentLoaded", () => {
         viewerCounter.textContent =
             `${String(currentIndex + 1).padStart(2, "0")} / ${String(photos.length).padStart(2, "0")}`;
 
+        // Open the viewer and request the full-size image.
         viewer.classList.add("active");
         viewer.setAttribute("aria-hidden", "false");
 
         document.body.style.overflow = "hidden";
+
+        viewerImage.src = fullImage;
 
     }
 
@@ -236,9 +300,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
         document.body.style.overflow = "";
 
+        // Remove the active full-size image source.
+        viewerImage.removeAttribute("src");
+        viewerImage.removeAttribute("srcset");
+        viewerImage.alt = "";
+        viewerImage.onerror = null;
+
     }
 
-    closeBtn.addEventListener("click", closeViewer);
+
+    if (closeBtn) {
+        closeBtn.addEventListener("click", closeViewer);
+    }
 
     viewer.addEventListener("click", event => {
 
@@ -253,20 +326,23 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function nextPhoto() {
 
-        currentIndex = (currentIndex + 1) % photos.length;
-        openViewer(currentIndex);
+        openViewer(currentIndex + 1);
 
     }
 
     function previousPhoto() {
 
-        currentIndex = (currentIndex - 1 + photos.length) % photos.length;
-        openViewer(currentIndex);
+        openViewer(currentIndex - 1);
 
     }
 
-    nextBtn.addEventListener("click", nextPhoto);
-    prevBtn.addEventListener("click", previousPhoto);
+    if (nextBtn) {
+        nextBtn.addEventListener("click", nextPhoto);
+    }
+
+    if (prevBtn) {
+        prevBtn.addEventListener("click", previousPhoto);
+    }
 
 
     // KEYBOARD CONTROLS
@@ -275,9 +351,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (!viewer.classList.contains("active")) return;
 
-        if (event.key === "Escape") closeViewer();
-        if (event.key === "ArrowRight") nextPhoto();
-        if (event.key === "ArrowLeft") previousPhoto();
+        if (event.key === "Escape") {
+            closeViewer();
+        }
+
+        if (event.key === "ArrowRight") {
+            event.preventDefault();
+            nextPhoto();
+        }
+
+        if (event.key === "ArrowLeft") {
+            event.preventDefault();
+            previousPhoto();
+        }
 
     });
 
@@ -287,9 +373,12 @@ document.addEventListener("DOMContentLoaded", () => {
     photos.forEach(photo => {
 
         const image = photo.querySelector("img");
+        if (!image) return;
 
         image.addEventListener("error", () => {
-            console.error("Could not load photograph:", image.src);
+
+            console.error("Could not load wall photograph:", image.src);
+
         });
 
     });

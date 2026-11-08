@@ -174,17 +174,19 @@ body {
     width: 100%;
     line-height: 0;
     background: #ddd4c5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .photo-frame img {
     display: block;
     width: 100%;
-    height: auto;
+    height: auto !important;
     max-height: 310px;
     object-fit: contain;
     pointer-events: none;
 }
-
 .photo-number {
     position: absolute;
     bottom: 8px;
@@ -1084,4 +1086,12 @@ body {
     border-color: #ef62a6;
     color: #252525;
     transform: translateY(-3px);
+}
+#viewerImage {
+    display: block;
+    width: auto !important;
+    height: auto !important;
+    max-width: 100%;
+    max-height: 75vh;
+    object-fit: contain;
 }
