@@ -111,7 +111,16 @@ section {
     z-index: 10;
 }
 
+/* Folder animation */
+@keyframes subtle-bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+
+
 .folder-icon {
+    animation: subtle-bounce 3s ease-in-out infinite;
     width: 55px;
     height: auto;
     transition: transform 0.3s ease;
@@ -119,6 +128,10 @@ section {
 
 .folder-button:hover .folder-icon {
     transform: translateY(-5px);
+}
+
+.photo-gallery.open .folder-icon {
+    animation: none;
 }
 
 
@@ -1037,3 +1050,4 @@ section {
         letter-spacing: 1.5px;
         padding: 10px 14px;
     }
+}
